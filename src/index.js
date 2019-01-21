@@ -8,7 +8,7 @@ import Login from "./components/Auth/Login";
 import Register from "./components/Auth/Register";
 import registerServiceWorker from "./registerServiceWorker";
 import firebase from "./firebase";
-import { setUser } from "./actions/index";
+import { setUser, clearUser } from "./actions/index";
 import Spinner from "./components/Spinner";
 
 import "semantic-ui-css/semantic.min.css";
@@ -29,6 +29,9 @@ class Root extends React.Component {
       if (user) {
         this.props.setUser(user);
         this.props.history.push("/");
+      } else {
+        this.props.history.push("/login");
+        this.props.clearUser();
       }
     });
   }
@@ -53,7 +56,7 @@ const mapStateFromProps = state => ({
 const RootWithAuth = withRouter(
   connect(
     mapStateFromProps,
-    { setUser }
+    { setUser, clearUser }
   )(Root)
 );
 
