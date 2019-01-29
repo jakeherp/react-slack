@@ -238,14 +238,17 @@ class Messages extends React.Component {
   };
 
   displayMessages = messages =>
-    messages.length > 0 &&
-    messages.map(message => (
-      <Message
-        key={message.timestamp}
-        message={message}
-        user={this.state.user}
-      />
-    ));
+    messages.length > 0 ? (
+      messages.map(message => (
+        <Message
+          key={message.timestamp}
+          message={message}
+          user={this.state.user}
+        />
+      ))
+    ) : (
+      <div>This is the very beginning of your direct message history.</div>
+    );
 
   displayChannelName = channel => {
     return channel
